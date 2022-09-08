@@ -4,3 +4,4 @@ INSERT INTO personas(apellido_casada,archivo_doc,cel,correo,direccion,estado_civ
 INSERT INTO usuarios(estado, fecha_fin_documentacion, numero_documento, password, rol)VALUES(12,'12-12-22', 1052555, '12345', 'Admin');
 INSERT INTO usuarios(estado, fecha_fin_documentacion, numero_documento, password, rol)VALUES(11,'12-12-22', 5263950, '123456', 'Funcionario');
 INSERT INTO usuarios(estado, fecha_fin_documentacion, numero_documento, password, rol)VALUES(4,'12-12-22', 256539, '529875', 'Funcionario');
+INSERT INTO usuarios(estado, fecha_fin_documentacion, numero_documento, password, rol)VALUES(6,'12-12-22', 56544652, '98476523', 'Funcionario');
