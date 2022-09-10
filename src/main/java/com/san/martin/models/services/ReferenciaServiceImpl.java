@@ -23,4 +23,25 @@ public class ReferenciaServiceImpl implements IReferenciaService{
 		return (List<Referencia>) referenciaDao.findAll();
 }
 
+	@Override
+	@Transactional(readOnly = true)
+	public Referencia findById(Long id) {
+		// TODO Auto-generated method stub
+		return referenciaDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Referencia saveReferencia(Referencia referencia) {
+		// TODO Auto-generated method stub
+		return referenciaDao.save(referencia);
+	}
+
+	@Override
+	@Transactional
+	public void deletereferenciaById(Long id) {
+		// TODO Auto-generated method stub
+		referenciaDao.deleteById(id);	
+	}
+
 }

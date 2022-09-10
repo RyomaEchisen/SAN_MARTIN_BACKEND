@@ -24,4 +24,26 @@ public class FuncionarioServiceImpl implements IFuncionarioService{
 		return (List<Funcionario>) funcionarioDao.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Funcionario findById(Long id) {
+		// TODO Auto-generated method stub
+		return funcionarioDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Funcionario saveFuncionario(Funcionario funcionario) {
+		// TODO Auto-generated method stub
+		return funcionarioDao.save(funcionario);
+	}
+
+	@Override
+	@Transactional
+	public void deletefuncionarioById(Long id) {
+		// TODO Auto-generated method stub
+		funcionarioDao.deleteById(id);
+		
+	}
+
 }

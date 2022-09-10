@@ -22,6 +22,28 @@ public class IdiomaServiceImpl implements IIdiomaService{
 	
 		return (List<Idioma>) idiomaDao.findAll();
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Idioma findById(Long id) {
+		// TODO Auto-generated method stub
+		return idiomaDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Idioma saveIdioma(Idioma idioma) {
+		// TODO Auto-generated method stub
+		return idiomaDao.save(idioma);
+	}
+
+	@Override
+	@Transactional
+	public void deleteidiomaById(Long id) {
+		// TODO Auto-generated method stub
+		idiomaDao.deleteById(id);
+		
+	}
 	
 
 }
