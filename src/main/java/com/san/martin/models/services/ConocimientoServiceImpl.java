@@ -16,11 +16,28 @@ public class ConocimientoServiceImpl implements IConocimientoService{
 	private IConocimientoDao conocimientoDao;
 	
 	@Override
-	
 	@Transactional(readOnly = true)
 	public List<Conocimiento> findAll(){
 	
 		return (List<Conocimiento>) conocimientoDao.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Conocimiento findById(Long id) {
+		return conocimientoDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Conocimiento save(Conocimiento conocimiento) {
+		return conocimientoDao.save(conocimiento);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		conocimientoDao.deleteById(id);
 	}
 
 }

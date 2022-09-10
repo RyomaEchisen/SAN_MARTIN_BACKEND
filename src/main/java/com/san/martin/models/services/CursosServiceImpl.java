@@ -16,11 +16,28 @@ public class CursosServiceImpl implements ICursosService{
 	private ICursosDao cursosDao;
 	
 	@Override
-	
 	@Transactional(readOnly = true)
 	public List<Cursos> findAll(){
 		
 		return(List<Cursos>) cursosDao.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Cursos findById(Long id) {
+		return cursosDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Cursos save(Cursos cursos) {
+		return cursosDao.save(cursos);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		cursosDao.deleteById(id);
 	}
 
 }

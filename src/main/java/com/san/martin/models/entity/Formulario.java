@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +35,14 @@ public class Formulario implements Serializable{
 	private Long pdfId;
 	private String observaciones;
 
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Funcionario funcionario;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private TipoFormulario tipoFormulario;
+	
+	
 	public Long getId() {
 		return id;
 	}

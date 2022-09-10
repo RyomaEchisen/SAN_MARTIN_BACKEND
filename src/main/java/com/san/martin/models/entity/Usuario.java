@@ -1,12 +1,18 @@
 package com.san.martin.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +29,17 @@ public class Usuario implements Serializable {
 	private String password;
 	private Date fechaFinDocumentacion;
 	private int estado;
+
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Funcionario funcionario;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario", cascade=CascadeType.ALL)
+	private List<Evento> eventos;
+	
+	public Usuario() {
+		this.eventos = new ArrayList<>();
+	}
 
 	public Long getId() {
 		return id;
@@ -71,5 +88,19 @@ public class Usuario implements Serializable {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
+	
+	
+	///evento
+	public List<Evento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(List<Evento> eventos) {
+		this.eventos = eventos;
+	}
+	
+	
+	
 	private static final long serialVersionUID = 1L;
+
 }

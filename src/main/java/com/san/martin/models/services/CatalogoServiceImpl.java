@@ -16,11 +16,28 @@ public class CatalogoServiceImpl implements ICatalogoService{
 	private ICatalogoDao catalogoDao;
 	
 	@Override
-	
 	@Transactional(readOnly = true)
 	public List<Catalogo> findAll(){
 		
 		return(List<Catalogo>) catalogoDao.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Catalogo findById(Long id) {
+		return catalogoDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Catalogo save(Catalogo catalogo) {
+		return catalogoDao.save(catalogo);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		catalogoDao.deleteById(id);
 	}
 
 }

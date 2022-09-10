@@ -16,12 +16,28 @@ public class ExperienciaLaboralServiceImpl implements IExperienciaLaboralService
 	private IExperienciaLaboralDao experienciaLaboralDao;
 	
 	@Override
-	
 	@Transactional(readOnly = true)
 	public List<ExperienciaLaboral> findAll(){
 		
 		return (List<ExperienciaLaboral>) experienciaLaboralDao.findAll();
 	
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public ExperienciaLaboral findById(Long id) {
+		return experienciaLaboralDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public ExperienciaLaboral save(ExperienciaLaboral experienciaLaboral) {
+		return experienciaLaboralDao.save(experienciaLaboral);
+	}
+
+	@Override
+	public void delete(Long id) {
+		experienciaLaboralDao.deleteById(id);
 	}
 
 }

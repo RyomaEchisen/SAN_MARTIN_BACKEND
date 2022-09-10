@@ -2,11 +2,11 @@ package com.san.martin.models.services;
 
 import java.util.List;
 
-import com.san.martin.models.entity.persona;
+import com.san.martin.models.entity.Persona;
 
 public interface IPersonaService {
 	
-	public List<persona> findAll();
+	public List<Persona> findAll();
 	
 }
 

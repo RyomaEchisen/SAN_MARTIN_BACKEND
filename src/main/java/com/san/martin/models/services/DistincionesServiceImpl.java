@@ -16,11 +16,28 @@ public class DistincionesServiceImpl implements IDistincionesService{
 	private IDistincionesDao distincionesDao;
 	
 	@Override
-	
 	@Transactional(readOnly = true)
 	public List<Distinciones> findAll(){
 	
 		return (List<Distinciones>) distincionesDao.findAll();
 }
+
+	@Override
+	@Transactional(readOnly = true)
+	public Distinciones findById(Long id) {
+		return distincionesDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Distinciones save(Distinciones distinciones) {
+		return distincionesDao.save(distinciones);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		distincionesDao.deleteById(id);
+	}
 
 }

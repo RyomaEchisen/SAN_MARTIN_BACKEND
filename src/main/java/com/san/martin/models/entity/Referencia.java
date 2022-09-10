@@ -3,9 +3,11 @@ package com.san.martin.models.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,9 @@ public class Referencia implements Serializable{
 	private String cargo;
 	private String telfRef;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	private HojaDeVida hojaDeVida;
+	
 	public Long getId() {
 		return id;
 	}

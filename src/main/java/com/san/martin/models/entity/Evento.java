@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -25,6 +27,12 @@ public class Evento implements Serializable {
 	private LocalDateTime fechaHora;
 	private String estadoAnterios;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Usuario usuario;
+	
+	
+	
+	
 	public Long getId() {
 		return id;
 	}

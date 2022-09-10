@@ -16,11 +16,28 @@ public class EventoServiceImpl implements IEventoService{
 	private IEventoDao eventoDao;
 	
 	@Override
-	
 	@Transactional(readOnly = true)
 	public List<Evento> findAll(){
 		
 		return(List<Evento>) eventoDao.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Evento findById(Long id) {
+		return eventoDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Evento save(Evento evento) {
+		return eventoDao.save(evento);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		eventoDao.deleteById(id);
 	}
 
 }

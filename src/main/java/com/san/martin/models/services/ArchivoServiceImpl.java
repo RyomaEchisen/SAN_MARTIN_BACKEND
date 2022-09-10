@@ -16,11 +16,31 @@ public class ArchivoServiceImpl implements IArchivoService{
 	private IArchivoDao archivoDao;
 	
 	@Override
-	
 	@Transactional(readOnly = true)
 	public List<Archivo> findAll(){
 		
 		return(List<Archivo>) archivoDao.findAll();
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Archivo findById(Long id) {
+		return archivoDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Archivo save(Archivo archivo) {
+		return archivoDao.save(archivo);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		archivoDao.deleteById(id);
+	}
+
+	
+	
 
 }

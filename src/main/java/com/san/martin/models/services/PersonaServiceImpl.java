@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.san.martin.models.dao.IPersonaDao;
-import com.san.martin.models.entity.persona;
+import com.san.martin.models.entity.Persona;
 
 @Service
 public class PersonaServiceImpl implements IPersonaService{
@@ -17,7 +17,7 @@ public class PersonaServiceImpl implements IPersonaService{
 	private IPersonaDao personaDao;
 	@Override
 	@Transactional (readOnly = true)
-	public List<persona> findAll(){ //es para accedes a la lista de personas
-		return (List<persona>) personaDao.findAll(); //retorna un iterable, por lo tanto tenemos un list
+	public List<Persona> findAll(){ //es para accedes a la lista de personas
+		return (List<Persona>) personaDao.findAll(); //retorna un iterable, por lo tanto tenemos un list
 	}
 }
