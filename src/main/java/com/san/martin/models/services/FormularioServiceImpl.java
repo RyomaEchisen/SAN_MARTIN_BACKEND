@@ -21,5 +21,24 @@ public class FormularioServiceImpl implements IFormularioService{
 	public List<Formulario> findAll(){
 		return (List<Formulario>) formularioDao.findAll();
 	}
+	@Transactional(readOnly = true)
+	@Override
+	public Formulario findById(Long id) {
+		// TODO Auto-generated method stub
+		return formularioDao.findById(id).orElse(null);
+	}
+	@Transactional
+	@Override
+	public Formulario saveFormulario(Formulario formulario) {
+		// TODO Auto-generated method stub
+		return formularioDao.save(formulario);
+	}
+	@Transactional
+	@Override
+	public void deleteformularioById(Long id) {
+		// TODO Auto-generated method stub
+		formularioDao.deleteById(id);
+		
+	}
 	
 }

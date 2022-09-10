@@ -21,4 +21,25 @@ public class TipoFormularioServiceImpl implements ITipoFormularioService{
 	public List<TipoFormulario> findAll(){
 		return (List<TipoFormulario>) tipoFormularioDao.findAll();
 }
+
+	@Override
+	@Transactional(readOnly = true)
+	public TipoFormulario findById(Long id) {
+		// TODO Auto-generated method stub
+		return tipoFormularioDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public TipoFormulario saveTipoFormulario(TipoFormulario tipoFormulario) {
+		// TODO Auto-generated method stub
+		return tipoFormularioDao.save(tipoFormulario);
+	}
+
+	@Override
+	@Transactional
+	public void deletetipoFormularioById(Long id) {
+		// TODO Auto-generated method stub
+		tipoFormularioDao.deleteById(id);
+	}
 }

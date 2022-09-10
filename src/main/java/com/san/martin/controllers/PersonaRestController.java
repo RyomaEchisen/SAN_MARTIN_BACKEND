@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.san.martin.models.entity.persona;
+import com.san.martin.models.entity.Persona;
 import com.san.martin.models.services.IPersonaService;
 
 @RestController
@@ -18,7 +18,7 @@ public class PersonaRestController {
 	private IPersonaService personaService;
 	
 	@GetMapping("/personas")
-	public List<persona> index(){
+	public List<Persona> index(){
 		return personaService.findAll();
 	}
 }

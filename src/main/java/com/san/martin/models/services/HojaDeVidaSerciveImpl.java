@@ -22,6 +22,28 @@ public class HojaDeVidaSerciveImpl implements IHojaDeVidaService{
 		
 		return (List<HojaDeVida>) hojaDeVidaDao.findAll();
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public HojaDeVida findById(Long id) {
+		// TODO Auto-generated method stub
+	return hojaDeVidaDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public HojaDeVida saveHojaDeVida(HojaDeVida hojaDeVida) {
+		// TODO Auto-generated method stub
+		return hojaDeVidaDao.save(hojaDeVida);
+	}
+
+	@Override
+	@Transactional
+	public void deletehojaDeVidaById(Long id) {
+		// TODO Auto-generated method stub
+		hojaDeVidaDao.deleteById(id);
+		
+	}
 	
 	
 }

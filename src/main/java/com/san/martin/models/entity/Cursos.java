@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +25,14 @@ public class Cursos implements Serializable{
 	private String nota;
 	private Date fecha;
 
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private HojaDeVida hojaDeVida;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Archivo archivo; 
+	
+	
 	public Long getId() {
 		return id;
 	}
