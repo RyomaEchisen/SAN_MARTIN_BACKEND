@@ -3,13 +3,17 @@ package com.san.martin.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="formularios")
@@ -21,7 +25,7 @@ public class Formulario implements Serializable{
 	private Long id;
 	private String nombre;
 	private String cargo;
-	private String mmotivo;
+	private String motivo;
 	private String tipoDeLicencia;
 	private Long tiempo;
 	private Date fechaInicio;
@@ -31,11 +35,30 @@ public class Formulario implements Serializable{
 	private Date fechaRetorno;
 	private int gestion;
 	private Date fecha;
-	private Long comprobateId;
+	private Long comprobanteId;
 	private Long pdfId;
 	private String observaciones;
-
+	@Column(name="create_fechacreacion")
+	@Temporal(TemporalType.DATE)
+	private Date fechacreacion;
 	
+	@PrePersist
+	public void prePersist(){
+		fechacreacion = new Date();
+	}
+	
+	
+	public Date getFechacreacion() {
+		return fechacreacion;
+	}
+
+
+
+	public void setFechacreacion(Date fechacreacion) {
+	this.fechacreacion = fechacreacion;
+	}
+
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Funcionario funcionario;
 	
@@ -67,12 +90,12 @@ public class Formulario implements Serializable{
 		this.cargo = cargo;
 	}
 
-	public String getMmotivo() {
-		return mmotivo;
+	public String getMotivo() {
+		return motivo;
 	}
 
-	public void setMmotivo(String mmotivo) {
-		this.mmotivo = mmotivo;
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
 	}
 
 	public String getTipoDeLicencia() {
@@ -147,12 +170,12 @@ public class Formulario implements Serializable{
 		this.fecha = fecha;
 	}
 
-	public Long getComprobateId() {
-		return comprobateId;
+	public Long getComprobanteId() {
+		return comprobanteId;
 	}
 
-	public void setComprobateId(Long comprobateId) {
-		this.comprobateId = comprobateId;
+	public void setComprobanteId(Long comprobanteId) {
+		this.comprobanteId = comprobanteId;
 	}
 
 	public Long getPdfId() {

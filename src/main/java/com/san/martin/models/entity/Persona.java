@@ -12,7 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="personas")
@@ -22,18 +27,21 @@ public class Persona implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nombres;
+    // sin restricciones
+	@Column(nullable=false)
+	private String nombres;//
 	private String paterno;
 	private String materno;
 	private String profesion;
 	private String apellidoCasada;
 	private Long fotoId;
-	private String numeroDocumento;
+	private String numeroDocumento;//unique
 	private String tipoDocumento;
 	private String expedicion;
 	private String archivoDoc;
 	private String sexo;
 	private String estadoCivil;
+	
 	private Date fechaNacimiento;
 	private String nacPais;
 	private String nacDepartamento;
@@ -51,12 +59,37 @@ public class Persona implements Serializable {
 	private String telfTrabajo;
 	private String fax;
 	private String cel;
-	private String correo;
+	@Column(nullable=false, unique = true)
+	private String correo;//
 	private boolean exiteRelacionParentesco;
 	private String nombreCompletoPariente;
 	private String relacionFamiliar;
 	private String gradoParentesco;
+	@Column(name="create_fechacreacion")
+	@Temporal(TemporalType.DATE)
+	private Date fechacreacion;
 	
+	@PrePersist
+	public void prePersist(){
+		fechacreacion = new Date();
+	}
+	
+	
+	public Date getFechacreacion() {
+		return fechacreacion;
+	}
+
+
+
+	public void setFechacreacion(Date fechacreacion) {
+	this.fechacreacion = fechacreacion;
+	}
+
+
+    //Relacion de uno a muchos hoja de vida
+	///Relacion de uno a muchos funcionario
+
+
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="persona", cascade=CascadeType.ALL)
 	private List <HojaDeVida> hojaDeVidas;
 	
