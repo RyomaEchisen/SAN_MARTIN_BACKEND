@@ -113,7 +113,7 @@ public class IdiomaRestController {
 		}
 
 		//delete 
-		@DeleteMapping("/archivos/{id}")
+		@DeleteMapping("/idiomas/{id}")
 		public ResponseEntity<?> delete(@PathVariable Long id) {
 			
 			Map<String, Object> response = new HashMap<>();
