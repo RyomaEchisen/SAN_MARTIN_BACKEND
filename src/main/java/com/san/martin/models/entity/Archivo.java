@@ -25,6 +25,7 @@ public class Archivo implements Serializable {
 	private Long tamanio;
 	private String formato;
 	private String ruta;
+	private String documento;
 
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="archivo", cascade=CascadeType.ALL)
 	private List<Cursos> cursos;
@@ -84,8 +85,15 @@ public class Archivo implements Serializable {
 	public void setRuta(String ruta) {
 		this.ruta = ruta;
 	}
-	
-	
+		
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+
 	///cursos
 	public List<Cursos> getCursos() {
 		return cursos;
@@ -94,6 +102,9 @@ public class Archivo implements Serializable {
 	public void setCursos(List<Cursos> cursos) {
 		this.cursos = cursos;
 	}
+	
+	
+	
 	
 	
 	///distinciones
