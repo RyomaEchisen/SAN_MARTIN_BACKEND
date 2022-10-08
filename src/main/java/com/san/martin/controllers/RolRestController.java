@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,58 +18,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.san.martin.models.entity.Usuario;
-import com.san.martin.models.services.IUsuarioService;
-//@EnableGlobalMethodSecurity(securedEnabled=true)
+import com.san.martin.models.entity.Rol;
+import com.san.martin.models.services.IRolService;
+
 @RestController
-@RequestMapping("/api_usuario")
-public class UsuarioRestController {
-	
+@RequestMapping("/api_roles")
+public class RolRestController {
 	@Autowired
-	private IUsuarioService usuarioService;
+	private IRolService rolService;
 	
-	@GetMapping("/usuarios")
-	public List<Usuario> index(){
-		return usuarioService.findAll();
-	}
-	//Crud
+	@GetMapping("/roles")
+	public List<Rol> index(){
+		return rolService.findAll();
+}
+//Crud
 	//listar
-	@Secured({"ROLE_ADMIN","ROLE_USER"})//para subida de foto
-	@GetMapping("/usuarios/{id}")
+	@GetMapping("/roles/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		
-		Usuario usuario = null;
+		Rol rol = null;
 		Map<String, Object> response = new HashMap<>();
 	
 		try {
-			usuario = usuarioService.findById(id);
+			rol = rolService.findById(id);
 		} catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		    
-		}
+		    }
 		
-		if(usuario == null) {
-			response.put("mensaje", "Usuario ID: ".concat(id.toString().concat(" --No existe en la base de Datos")));
+		
+		if(rol == null) {
+			response.put("mensaje", "Rol ID: ".concat(id.toString().concat(" --No existe en la base de Datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 			
 		}
-		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
-		
+		return new ResponseEntity<Rol>(rol, HttpStatus.OK);
 		
     }
 	//crear
 	//entity para las restricciones 
-	@Secured({"ROLE_ADMIN"})
-	@PostMapping("/usuarios")
-	public ResponseEntity<?> create(@RequestBody Usuario usuario) {
+	@PostMapping("/roles")
+	public ResponseEntity<?> create(@RequestBody Rol rol) {
 		
-		
-		Usuario usuarioNew = null;
+		Rol rolNew = null;
 		Map<String, Object> response = new HashMap<>();
+		
 		try {
-			usuarioNew = usuarioService.saveUsuario(usuario);
+			rolNew = rolService.saveRol(rol);
 		
 		} catch(DataAccessException e) {
 			
@@ -79,52 +73,43 @@ public class UsuarioRestController {
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		response.put("mensaje", "El Usuario ha sido creado con Éxito!!");
-		response.put("usuario", usuarioNew);
+		response.put("mensaje", "Rol se creo con Éxito!!");
+		response.put("rol", rolNew);
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 		
 	}
-    //Editar
-	@Secured({"ROLE_ADMIN"})
-	@PutMapping("/usuarios/{id}")
-	public ResponseEntity<?>  update(@RequestBody Usuario usuario, @PathVariable Long id ){
-		 Usuario usuarioActual= usuarioService.findById(id);
-	     
-		 Usuario usuarioUpdated = null;
+    //Editar, Actualizar
+	@PutMapping("/roles/{id}")
+	public ResponseEntity<?>  update(@RequestBody Rol rol, @PathVariable Long id ){
+	     Rol rolActual= rolService.findById(id);
+	     Rol rolUpdated = null;
 	     
 	     Map<String, Object> response = new HashMap<>();
-	     if(usuarioActual == null) {
-				response.put("mensaje", "Error: no se puede editar, El Usuario ID: ".concat(id.toString().concat(" --No existe en la base de Datos")));
+	     if(rolActual == null) {
+				response.put("mensaje", "Error: no se puede editar, Rol ID: ".concat(id.toString().concat(" --No existe en la base de Datos")));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-				
-				
-			}
+				}
 	     
 	     try {
-	     usuarioActual.setUsername(usuario.getUsername());
-	     usuarioActual.setPassword(usuario.getPassword());
-	     usuarioActual.setNombres(usuario.getNombres());
-	     usuarioActual.setEmail(usuario.getEmail());
-	     usuarioActual.setEnabled(usuario.getEnabled());
-	     usuarioActual.setApellidos(usuario.getApellidos());
+	     rolActual.setNombre(rol.getNombre());
 	     
-
 	     
-	     usuarioUpdated = usuarioService.saveUsuario(usuarioActual);
+	     
+	     rolUpdated = rolService.saveRol(rolActual);
 	     } catch(DataAccessException e) {
 			
-			response.put("mensaje", "Error al Actualizar Usuario en la base de datos");	
+			response.put("mensaje", "Error al Actualizar Rol en la base de datos");	
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	     
-	     response.put("mensaje", "Usuario ha sido actualizado con Éxito!!");
-		 response.put("usuario", usuarioUpdated);
+	     response.put("mensaje", "Rol ha sido actualizado con Éxito!!");
+		 response.put("rol", rolUpdated);
 	     return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 	     
 	     }
-	@Secured({"ROLE_ADMIN"})
-	 @DeleteMapping("/usuarios/{id}")
+	
+	 @DeleteMapping("/roles/{id}")
 	     @ResponseStatus(HttpStatus.NO_CONTENT)
 	     public ResponseEntity<?> delete(@PathVariable Long id) {
 		 Map<String, Object> response = new HashMap<>();
@@ -132,18 +117,16 @@ public class UsuarioRestController {
 		 
 		  try {
 	     
-			usuarioService.deleteusuarioById(id);
+	        rolService.deleterolById(id);
 		  } catch(DataAccessException e) {
 				
-				response.put("mensaje", "Error al Eliminar Usuario en la base de datos");	
+				response.put("mensaje", "Error al Eliminar Rol en la base de datos");	
 				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-		  response.put("mensaje", "Usuario Eliminado con éxito!");		
+		  response.put("mensaje", "Rol se ha eliminado con éxito!");		
 		  return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
 	 	}
-	//configuración en subida de Imagen y documentos
-	 //subida de imagen--- postmapping - persona/upload
-	 //@Secured({"ROLE_ADMIN","ROLE_USER"})
+
 }

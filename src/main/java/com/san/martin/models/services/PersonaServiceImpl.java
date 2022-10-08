@@ -17,7 +17,7 @@ public class PersonaServiceImpl implements IPersonaService{
 	@Autowired
 	private IPersonaDao personaDao;
 	@Override
-	//1.2 copiar el transactional lectura
+	//copiar el transactional lectura
 	@Transactional(readOnly = true)
 	public List<Persona> findAll(){ //es para accedes a la lista de personas
 		return (List<Persona>) personaDao.findAll(); //retorna un iterable, por lo tanto tenemos un list

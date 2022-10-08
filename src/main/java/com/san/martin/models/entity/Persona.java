@@ -34,7 +34,7 @@ public class Persona implements Serializable {
 	private String materno;
 	private String profesion;
 	private String apellidoCasada;
-	private Long fotoId;
+	private String fotoId;
 	private String numeroDocumento;//unique
 	private String tipoDocumento;
 	private String expedicion;
@@ -139,10 +139,10 @@ public class Persona implements Serializable {
 	public void setApellidoCasada(String apellidoCasada) {
 		this.apellidoCasada = apellidoCasada;
 	}
-	public Long getFotoId() {
+	public String getFotoId() {
 		return fotoId;
 	}
-	public void setFotoId(Long fotoId) {
+	public void setFotoId(String fotoId) {
 		this.fotoId = fotoId;
 	}
 	public String getNumeroDocumento() {
