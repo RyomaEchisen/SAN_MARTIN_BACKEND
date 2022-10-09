@@ -13,26 +13,23 @@ import org.springframework.stereotype.Component;
 import com.san.martin.models.entity.Usuario;
 import com.san.martin.models.services.IUsuarioService;
 
-
 @Component
 public class InfoAdicionalToken implements TokenEnhancer {
-	@Autowired
-	private IUsuarioService usuarioService;
+  @Autowired
+  private IUsuarioService usuarioService;
 
-	@Override
-	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-		
-		Usuario usuario = usuarioService.findByUsername(authentication.getName());
-		Map<String, Object> info = new HashMap<>();
-		info.put("info_adicional", "Hola que tal!: ".concat(authentication.getName()));
-		
-		info.put("nombre", usuario.getNombres());
-	
-		
-		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
-		
-		return accessToken;
-	}
+  @Override
+  public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 
+    Usuario usuario = usuarioService.findByUsername(authentication.getName());
+    Map<String, Object> info = new HashMap<>();
+    info.put("info_adicional", "Hola que tal!: ".concat(authentication.getName()));
+
+    info.put("nombre", usuario.getNombres());
+
+    ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
+
+    return accessToken;
+  }
 
 }
