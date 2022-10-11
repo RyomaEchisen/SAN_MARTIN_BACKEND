@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,9 @@ import com.san.martin.models.services.IUsuarioService;
 @RestController
 @RequestMapping("/api_usuario")
 public class UsuarioRestController {
+
+  @Autowired
+  private BCryptPasswordEncoder passwordEncoder;
 
   @Autowired
   private IUsuarioService usuarioService;
@@ -69,6 +73,7 @@ public class UsuarioRestController {
     Usuario usuarioNew = null;
     Map<String, Object> response = new HashMap<>();
     try {
+      usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
       usuarioNew = usuarioService.saveUsuario(usuario);
 
     } catch (DataAccessException e) {
