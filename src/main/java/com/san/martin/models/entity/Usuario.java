@@ -32,8 +32,6 @@ public class Usuario implements Serializable {
 	@Column(length = 60)
 	private String password;
 	private Boolean enabled;
-	private String nombres;
-	private String apellidos;
 	@Column(unique = true)
 	private String email;
 
@@ -83,22 +81,6 @@ public class Usuario implements Serializable {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
-	}
-
-	public String getNombres() {
-		return nombres;
-	}
-
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
-	}
-
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
 	}
 
 	public String getEmail() {

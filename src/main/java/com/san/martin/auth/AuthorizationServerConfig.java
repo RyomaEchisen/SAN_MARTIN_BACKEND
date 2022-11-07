@@ -59,7 +59,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
   @Bean
   public JwtTokenStore tokenStore() {
-    // TODO Auto-generated method stub
+    // TODO: Auto-generated method stub
     return new JwtTokenStore(accessTokenConverter());
   }
 

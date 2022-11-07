@@ -18,6 +18,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         .antMatchers(HttpMethod.POST, "/api_usuario/usuarios/login").permitAll()
         .antMatchers(HttpMethod.DELETE, "/api_usuario/usuarios/{id}").permitAll()
         .antMatchers(HttpMethod.PUT, "/api_usuario/usuarios").permitAll()
+        .antMatchers(HttpMethod.GET, "/test").permitAll()
 
         // http.authorizeRequests().antMatchers(HttpMethod.GET,"/api_personas/personas").permitAll()
         // .antMatchers(HttpMethod.GET, "/api_personas/personas/{id}").permitAll()

@@ -4,7 +4,9 @@ package com.san.martin;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class ProyectoSisApplication implements CommandLineRunner {
@@ -12,19 +14,19 @@ public class ProyectoSisApplication implements CommandLineRunner {
   // @Autowired
   // private BCryptPasswordEncoder passwordEncoder;
 
-  // public WebMvcConfigurer corsMappingConfigurer() {
-  //   return new WebMvcConfigurer() {
-  //       @Override
-  //       public void addCorsMappings(CorsRegistry registry) {
-  //           registry.addMapping("/**")
-  //             .allowedOrigins("*")
-  //             .allowedMethods("*")
-  //             .maxAge(3600)
-  //             .allowedHeaders("*")
-  //             .exposedHeaders("*");
-  //       }
-  //   };
-  // }
+  public WebMvcConfigurer corsMappingConfigurer() {
+    return new WebMvcConfigurer() {
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/**")
+              .allowedOrigins("*")
+              .allowedMethods("*")
+              .maxAge(3600)
+              .allowedHeaders("*")
+              .exposedHeaders("*");
+        }
+    };
+  }
 
 
   public static void main(String[] args) {

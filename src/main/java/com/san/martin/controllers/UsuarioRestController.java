@@ -96,7 +96,6 @@ public class UsuarioRestController {
   @PostMapping("/usuarios/login")
   public ResponseEntity<?> login(@RequestBody UsuarioLogin usuarioLogin) {
     Map<String, Object> response = new HashMap<>();
-    System.out.println("Usuario logeado: \n" + usuarioLogin.getEmail());
     try {
       System.out.println("Usuario logeado: \n" + usuarioLogin.getEmail());
     } catch (DataAccessException e) {
@@ -130,10 +129,8 @@ public class UsuarioRestController {
     try {
       usuarioActual.setUsername(usuario.getUsername());
       usuarioActual.setPassword(usuario.getPassword());
-      usuarioActual.setNombres(usuario.getNombres());
       usuarioActual.setEmail(usuario.getEmail());
       usuarioActual.setEnabled(usuario.getEnabled());
-      usuarioActual.setApellidos(usuario.getApellidos());
 
       usuarioUpdated = usuarioService.saveUsuario(usuarioActual);
     } catch (DataAccessException e) {
