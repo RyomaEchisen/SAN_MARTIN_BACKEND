@@ -2,10 +2,6 @@ package com.san.martin.controllers;
 
 import java.io.File;
 import java.io.IOException;
-<<<<<<< HEAD
-import java.net.MalformedURLException;
-=======
->>>>>>> ab9db8d96184f22a63a4ca8aceaba3ade580157b
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -199,18 +195,12 @@ public class PersonaRestController {
 	 @PostMapping("/personas/upload")
 	 public ResponseEntity<?>upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
 		 Map<String, Object> response = new HashMap<>();
-<<<<<<< HEAD
-		 Persona persona = personaService.findById(id);
-		 if(!archivo.isEmpty()) {
-			 String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename();
-=======
 		 
 		 Persona persona = personaService.findById(id);
 		 
 		 if(!archivo.isEmpty()) {
 			 String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename().replace("", " ");
 			 //String nombreArchivo = archivo.getOriginalFilename(); 
->>>>>>> ab9db8d96184f22a63a4ca8aceaba3ade580157b
 			 Path rutaArchivo = Paths.get("uploads").resolve(nombreArchivo).toAbsolutePath();
 			 try {
 				 Files.copy(archivo.getInputStream(), rutaArchivo);
@@ -219,10 +209,7 @@ public class PersonaRestController {
 				 response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
 				 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			 }
-<<<<<<< HEAD
-=======
 			 
->>>>>>> ab9db8d96184f22a63a4ca8aceaba3ade580157b
 			 String nombreFotoAnterior = persona.getFotoId();
 			 if(nombreFotoAnterior !=null && nombreFotoAnterior.length() >0) {
 				 Path rutaFotoAnterior = Paths.get("uploads").resolve(nombreFotoAnterior).toAbsolutePath();
@@ -231,49 +218,20 @@ public class PersonaRestController {
 					 archivoFotoAnterior.delete();
 				 }
 			 }
-<<<<<<< HEAD
-			 persona.setFotoId(nombreArchivo);
-			 personaService.savePersona(persona);
-=======
 			 
 			 
 			 
 			 persona.setFotoId(nombreArchivo);
 			 personaService.savePersona(persona);
 			 
->>>>>>> ab9db8d96184f22a63a4ca8aceaba3ade580157b
 			 response.put("persona", persona);
 			 response.put("mensaje","Has subido correctamente la imagen: " + nombreArchivo);
 		 }
 		 return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 	 }
-<<<<<<< HEAD
-	 
-	 @GetMapping("/uploads/img/{nombreFoto:.+}")
-	 public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto) {
-		 
-		 Path rutaArchivo = Paths.get("uploads").resolve(nombreFoto).toAbsolutePath();
-		 
-		 Resource recurso = null;
-		 
-		 try {
-			recurso = new UrlResource(rutaArchivo.toUri());
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		 if(!recurso.exists() && !recurso.isReadable()) {
-			 throw new RuntimeException("Error no se pudo cargar la imagen: " + nombreFoto);
-		 }
-		 HttpHeaders cabecera = new HttpHeaders();
-		 cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
-		 
-		 return new ResponseEntity<Resource>(recurso, cabecera,  HttpStatus.OK);
-	 }
-=======
 
 	 
 	 
->>>>>>> ab9db8d96184f22a63a4ca8aceaba3ade580157b
 }
 
 
