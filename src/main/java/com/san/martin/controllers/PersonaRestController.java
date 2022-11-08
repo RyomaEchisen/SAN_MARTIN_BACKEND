@@ -196,11 +196,9 @@ public class PersonaRestController {
 	 @PostMapping("/personas/upload")
 	 public ResponseEntity<?>upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
 		 Map<String, Object> response = new HashMap<>();
-		 
 		 Persona persona = personaService.findById(id);
-		 
 		 if(!archivo.isEmpty()) {
-			 String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename().replace("", " ");
+			 String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename();
 			 Path rutaArchivo = Paths.get("uploads").resolve(nombreArchivo).toAbsolutePath();
 			 try {
 				 Files.copy(archivo.getInputStream(), rutaArchivo);
@@ -209,7 +207,6 @@ public class PersonaRestController {
 				 response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
 				 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			 }
-			 
 			 String nombreFotoAnterior = persona.getFotoId();
 			 if(nombreFotoAnterior !=null && nombreFotoAnterior.length() >0) {
 				 Path rutaFotoAnterior = Paths.get("uploads").resolve(nombreFotoAnterior).toAbsolutePath();
@@ -218,12 +215,8 @@ public class PersonaRestController {
 					 archivoFotoAnterior.delete();
 				 }
 			 }
-			 
-			 
-			 
 			 persona.setFotoId(nombreArchivo);
 			 personaService.savePersona(persona);
-			 
 			 response.put("persona", persona);
 			 response.put("mensaje","Has subido correctamente la imagen: " + nombreArchivo);
 		 }
