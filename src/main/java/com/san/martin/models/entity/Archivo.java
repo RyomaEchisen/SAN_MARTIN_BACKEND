@@ -25,7 +25,11 @@ public class Archivo implements Serializable {
 	private Long tamanio;
 	private String formato;
 	private String ruta;
+<<<<<<< HEAD
 	private String documento;
+=======
+	private String documento;// se inserta Documento 
+>>>>>>> ab9db8d96184f22a63a4ca8aceaba3ade580157b
 
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="archivo", cascade=CascadeType.ALL)
 	private List<Cursos> cursos;
@@ -68,6 +72,13 @@ public class Archivo implements Serializable {
 
 	public void setTamanio(Long tamanio) {
 		this.tamanio = tamanio;
+	}
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
 	}
 
 	public String getFormato() {

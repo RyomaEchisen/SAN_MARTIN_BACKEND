@@ -1,13 +1,46 @@
 package com.san.martin;
 
+// import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class ProyectoSisApplication {
+public class ProyectoSisApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProyectoSisApplication.class, args);
-	}
+  // @Autowired
+  // private BCryptPasswordEncoder passwordEncoder;
 
+  public WebMvcConfigurer corsMappingConfigurer() {
+    return new WebMvcConfigurer() {
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/**")
+              .allowedOrigins("*")
+              .allowedMethods("*")
+              .maxAge(3600)
+              .allowedHeaders("*")
+              .exposedHeaders("*");
+        }
+    };
+  }
+
+
+  public static void main(String[] args) {
+    SpringApplication.run(ProyectoSisApplication.class, args);
+  }
+
+  @Override
+  public void run(String... args) throws Exception {
+    // TEST bcrypt encryption
+    // String password = "12345";
+
+    // for (int i = 0; i < 4; i++) {
+    //   String passwordBcrypt = passwordEncoder.encode(password);
+    //   System.out.println(passwordBcrypt);
+    // }
+  }
 }

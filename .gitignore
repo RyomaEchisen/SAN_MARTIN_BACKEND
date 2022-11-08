@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+/src/main/resources/application.properties
+
 ### STS ###
 .apt_generated
 .classpath
@@ -23,6 +25,7 @@ target/
 /nbproject/private/
 /nbbuild/
 /dist/
+/bin/
 /nbdist/
 /.nb-gradle/
 build/

@@ -58,7 +58,7 @@ public class FuncionarioRestController {
 			
 			
 	    }
-		//crear
+		//crear funcionario
 		//entity para las restricciones 
 		@PostMapping("/funcionarios")
 		public ResponseEntity<?> create(@RequestBody Funcionario funcionario) {
@@ -72,7 +72,7 @@ public class FuncionarioRestController {
 				
 				response.put("mensaje", "Error al realizar el insert en la base de datos");	
 				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+	 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			response.put("mensaje", "El Funcionario ha sido creado con Éxito!!");
 			response.put("funcionario", funcionarioNew);
