@@ -10,6 +10,7 @@ import com.san.martin.models.entity.Usuario;
 public interface IUsuarioDao extends CrudRepository<Usuario, Long>{
 	/* para tener una consulta customizada query en spring jpa se tiene mas ejemplos*/
 	public Usuario findByUsername(String username);
+	//public Usuario finsByUsernameAndPassword(String username, String password);
 	@Query("select u from Usuario u where u.username=?1")
 	public Usuario findByUsername2(String username);
 	
