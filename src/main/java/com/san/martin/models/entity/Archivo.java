@@ -93,13 +93,7 @@ public class Archivo implements Serializable {
 		this.ruta = ruta;
 	}
 		
-	public String getDocumento() {
-		return documento;
-	}
-
-	public void setDocumento(String documento) {
-		this.documento = documento;
-	}
+	
 
 	///cursos
 	public List<Cursos> getCursos() {

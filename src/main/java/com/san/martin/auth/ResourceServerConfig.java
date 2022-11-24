@@ -129,7 +129,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/api_catalogo/catalogos/{id}").permitAll()
 		.antMatchers(HttpMethod.POST, "/api_catalogo/catalogos").permitAll()
 		.antMatchers(HttpMethod.DELETE, "/api_catalogo/catalogos/{id}").permitAll()
-		.antMatchers(HttpMethod.PUT, "/api_catalogo/catalogos").permitAll()
+		.antMatchers(HttpMethod.PUT, "/api_catalogo/catalogos").permitAll();
 		
 		
 		
@@ -138,7 +138,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		
 		
-		.anyRequest().authenticated().and().cors().configurationSource(corsConfigurationSource());
+		/*	
+	.anyRequest().authenticated().and().cors().configurationSource(corsConfigurationSource());
 		
 	}
 	@Bean
@@ -162,6 +163,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}
-}
+	*/
+  }}
+
  
 
