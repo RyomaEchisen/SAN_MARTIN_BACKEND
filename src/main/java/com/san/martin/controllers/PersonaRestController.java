@@ -33,19 +33,19 @@ import com.san.martin.models.entity.Persona;
 import com.san.martin.models.services.IPersonaService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/personas")
 public class PersonaRestController {
 	
 	@Autowired
 	private IPersonaService personaService;
 	
-	@GetMapping("/personas")
+	@GetMapping("")
 	public List<Persona> index(){
 		return personaService.findAll();
 	}
 	//Crud
 	//listar 
-	@GetMapping("/personas/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		
 		Persona persona = null;
@@ -74,7 +74,7 @@ public class PersonaRestController {
     }
 	//crear
 	//entity para las restricciones 
-	@PostMapping("/personas")
+	@PostMapping("")
 	public ResponseEntity<?> create(@RequestBody Persona persona) {
 		
 		
@@ -96,7 +96,7 @@ public class PersonaRestController {
 		
 	}
     //Editar, Actualizar
-	@PutMapping("/personas/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<?>  update(@RequestBody Persona persona, @PathVariable Long id ){
 	     Persona personaActual= personaService.findById(id);
 	     
@@ -162,7 +162,7 @@ public class PersonaRestController {
 	     
 	     }
 	
-	 @DeleteMapping("/personas/{id}")
+	 @DeleteMapping("/{id}")
 	     @ResponseStatus(HttpStatus.NO_CONTENT)
 	     public ResponseEntity<?> delete(@PathVariable Long id) {
 		 Map<String, Object> response = new HashMap<>();
@@ -192,7 +192,7 @@ public class PersonaRestController {
 		  return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
 	 	}
-	 @PostMapping("/personas/upload")
+	 @PostMapping("/upload")
 	 public ResponseEntity<?>upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
 		 Map<String, Object> response = new HashMap<>();
 		 
