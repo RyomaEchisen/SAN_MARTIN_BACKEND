@@ -41,8 +41,6 @@ public class PersonaServiceImpl implements IPersonaService{
 	public void deletepersonaById(Long id) {
 		// TODO Auto-generated method stub
 		//1.5
-	personaDao.deleteById(id);
-		
-
+    personaDao.deleteById(id);
 	}
 }

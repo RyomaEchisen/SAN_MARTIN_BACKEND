@@ -22,19 +22,19 @@ import com.san.martin.models.entity.Sucursal;
 import com.san.martin.models.services.ISucursalService;
 
 @RestController
-@RequestMapping("/api_sucursal")
+@RequestMapping("/sucursales")
 public class SucursalRestController {
 	
 	@Autowired
 	private ISucursalService sucursalService;
 	
-	@GetMapping("/sucursales")
+	@GetMapping("")
 	public List<Sucursal> index(){
 		return sucursalService.findAll();
 	}
 	//Crud
 	//listar
-		@GetMapping("/sucursales/{id}")
+		@GetMapping("/{id}")
 		public ResponseEntity<?> show(@PathVariable Long id) {
 			
 			Sucursal sucursal = null;
@@ -61,7 +61,7 @@ public class SucursalRestController {
 	    }
 		//crear
 		//entity para las restricciones 
-		@PostMapping("/sucursales")
+		@PostMapping("")
 		public ResponseEntity<?> create(@RequestBody Sucursal sucursal) {
 			
 			
@@ -83,7 +83,7 @@ public class SucursalRestController {
 			
 		}
 	    //Editar
-		@PutMapping("/sucursales/{id}")
+		@PutMapping("/{id}")
 		public ResponseEntity<?>  update(@RequestBody Sucursal sucursal, @PathVariable Long id ){
 		     Sucursal sucursalActual= sucursalService.findById(id);
 		     
@@ -115,7 +115,7 @@ public class SucursalRestController {
 		     
 		     }
 		
-		 @DeleteMapping("/sucursales/{id}")
+		 @DeleteMapping("/{id}")
 		     @ResponseStatus(HttpStatus.NO_CONTENT)
 		     public ResponseEntity<?> delete(@PathVariable Long id) {
 			 Map<String, Object> response = new HashMap<>();
