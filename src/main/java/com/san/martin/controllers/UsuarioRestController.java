@@ -25,6 +25,8 @@ import com.san.martin.models.dto.UsuarioLogin;
 import com.san.martin.models.entity.Usuario;
 import com.san.martin.models.services.IUsuarioService;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 //@EnableGlobalMethodSecurity(securedEnabled=true)
 @CrossOrigin(maxAge = 3600, origins = "http://localhost:4200")
 @RestController
@@ -41,7 +43,7 @@ public class UsuarioRestController {
   public List<Usuario> index() {
     return usuarioService.findAll();
   }
-
+  
   // Crud
   // listar
   @Secured({ "ROLE_ADMIN", "ROLE_USER" }) // para subida de foto
@@ -96,8 +98,26 @@ public class UsuarioRestController {
   @PostMapping("/usuarios/login")
   public ResponseEntity<?> login(@RequestBody UsuarioLogin usuarioLogin) {
     Map<String, Object> response = new HashMap<>();
+    
+    
+    if (usuarioLogin.getEmail() == null || usuarioLogin.getPassword() == null || usuarioLogin.getEmail() == "" || usuarioLogin.getPassword() == "" ) {
+        throw new UsernameNotFoundException("Invalid username or password.");
+      }else {
+    
+    Usuario data=null;
     try {
-      System.out.println("Usuario logeado: \n" + usuarioLogin.getEmail());
+     // data = usuarioService.userlogin(usuarioLogin.getEmail(), passwordEncoder.encode(usuarioLogin.getPassword()));
+      data = usuarioService.userlogin(""+usuarioLogin.getEmail(), ""+usuarioLogin.getPassword());
+      //System.out.println(passwordEncoder.encode(usuarioLogin.getPassword()));
+    response.put("data", usuarioService.findAll());
+    response.put("datapass", passwordEncoder.encode(usuarioLogin.getPassword()));
+      
+   /*if (data == null ) {
+        throw new UsernameNotFoundException("Invalid username or password.");
+      }else{
+        System.out.println("Usuario logeado: \n" + usuarioLogin.getEmail());
+      }*/
+        //System.out.println("Usuario logeado: \n" + usuarioLogin.getEmail());
     } catch (DataAccessException e) {
 
       response.put("mensaje", "Error al realizar el insert en la base de datos");
@@ -107,7 +127,7 @@ public class UsuarioRestController {
     response.put("mensaje", "El Usuario se a logueado con éxito!!");
     response.put("usuario", usuarioLogin);
     return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-
+      }
   }
 
   // Editar

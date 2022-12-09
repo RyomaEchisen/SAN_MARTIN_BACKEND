@@ -74,6 +74,12 @@ public class UsuarioServiceImpl implements IUsuarioService,UserDetailsService {
 		return usuarioDao.findByUsername(username);
 	}
 
+	
+	@Override
+	public Usuario userlogin(String username,String password) {
+		
+		return usuarioDao.userlog(username,password);
+	}
 }
  
 

@@ -12,7 +12,7 @@ public interface IUsuarioService {
 	public Usuario findById(Long id);
 	public Usuario saveUsuario(Usuario usuario);
 	public void deleteusuarioById(Long id);
-	
+	public Usuario userlogin(String username,String password);
 	
 	
 }
