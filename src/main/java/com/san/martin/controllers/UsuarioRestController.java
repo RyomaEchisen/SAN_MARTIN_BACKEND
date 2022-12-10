@@ -71,7 +71,7 @@ public class UsuarioRestController {
 
   // crear
   // entity para las restricciones
-  @Secured({ "ROLE_ADMIN" })
+ // @Secured({ "ROLE_ADMIN" })
   @PostMapping("/usuarios")
   public ResponseEntity<?> create(@RequestBody Usuario usuario) {
 
