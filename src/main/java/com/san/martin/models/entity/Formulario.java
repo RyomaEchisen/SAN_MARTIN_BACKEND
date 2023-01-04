@@ -23,6 +23,7 @@ public class Formulario implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	private String tipoF;
 	private String nombre;
 	private String cargo;
 	private String motivo;
@@ -189,6 +190,17 @@ public class Formulario implements Serializable{
 	public String getObservaciones() {
 		return observaciones;
 	}
+	
+	
+	public String getTipoF() {
+		return tipoF;
+	}
+
+
+	public void setTipoF(String tipoF) {
+		this.tipoF = tipoF;
+	}
+
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;

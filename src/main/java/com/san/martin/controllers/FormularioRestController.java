@@ -81,6 +81,7 @@ public class FormularioRestController {
 			}
 			response.put("mensaje", "El Formulario ha sido creado con Éxito!!");
 			response.put("formulario", formularioNew);
+			response.put("datos del formulario", formulario);
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 			
 		}
@@ -100,6 +101,7 @@ public class FormularioRestController {
 		     
 		     try {
 		    	 
+		    	 formularioActual.setTipoF(formulario.getTipoF());
 		    	 formularioActual.setNombre(formulario.getNombre());
 		    	 formularioActual.setCargo(formulario.getCargo());
 		    	 formularioActual.setMotivo(formulario.getMotivo());
