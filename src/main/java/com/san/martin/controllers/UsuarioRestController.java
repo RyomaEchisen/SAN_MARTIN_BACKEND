@@ -46,7 +46,7 @@ public class UsuarioRestController {
   
   // Crud
   // listar
-  @Secured({ "ROLE_ADMIN", "ROLE_USER" }) // para subida de foto
+  //@Secured({ "ROLE_ADMIN", "ROLE_USER" }) // para subida de foto
   @GetMapping("/usuarios/{id}")
   public ResponseEntity<?> show(@PathVariable Long id) {
 
@@ -71,7 +71,7 @@ public class UsuarioRestController {
 
   // crear
   // entity para las restricciones
- // @Secured({ "ROLE_ADMIN" })
+ //@Secured({ "ROLE_ADMIN" })
   @PostMapping("/usuarios")
   public ResponseEntity<?> create(@RequestBody Usuario usuario) {
 
@@ -108,9 +108,9 @@ public class UsuarioRestController {
     try {
      // data = usuarioService.userlogin(usuarioLogin.getEmail(), passwordEncoder.encode(usuarioLogin.getPassword()));
       data = usuarioService.userlogin(""+usuarioLogin.getEmail(), ""+usuarioLogin.getPassword());
-      //System.out.println(passwordEncoder.encode(usuarioLogin.getPassword()));
+      System.out.println(passwordEncoder.encode(usuarioLogin.getPassword()));
     response.put("data", usuarioService.findAll());
-    response.put("datapass", passwordEncoder.encode(usuarioLogin.getPassword()));
+    //response.put("datapass", passwordEncoder.encode(usuarioLogin.getPassword()));
       
    /*if (data == null ) {
         throw new UsernameNotFoundException("Invalid username or password.");
@@ -131,7 +131,7 @@ public class UsuarioRestController {
   }
 
   // Editar
-  @Secured({ "ROLE_ADMIN" })
+  //@Secured({ "ROLE_ADMIN" })
   @PutMapping("/usuarios/{id}")
   public ResponseEntity<?> update(@RequestBody Usuario usuario, @PathVariable Long id) {
     Usuario usuarioActual = usuarioService.findById(id);
@@ -166,7 +166,7 @@ public class UsuarioRestController {
 
   }
 
-  @Secured({ "ROLE_ADMIN" })
+  //@Secured({ "ROLE_ADMIN" })
   @DeleteMapping("/usuarios/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public ResponseEntity<?> delete(@PathVariable Long id) {

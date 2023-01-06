@@ -34,10 +34,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     security.tokenKeyAccess("permitAll()")
         .checkTokenAccess("isAuthenticated()");
   }
-
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    clients.inMemory().withClient("angularapp")// clientes
+    clients.inMemory().withClient("angularapp")// usuarios
         .secret(passwordEncoder.encode("12345"))// contraseña
         .scopes("read", "write")// permiso
         .authorizedGrantTypes("password", "refresh token")// como vamos a obtener el Token
@@ -45,6 +44,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         .refreshTokenValiditySeconds(3600);
 
   }
+  
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
