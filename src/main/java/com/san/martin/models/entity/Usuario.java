@@ -34,16 +34,18 @@ public class Usuario implements Serializable {
 	private Boolean enabled;
 	@Column(unique = true)
 	private String email;
+	private String cargo;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	/* customizable para asignar otro nombre a la tabla intermedia */
 	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "usuario_id", "rol_id" }) })
-	private List<Rol> roles;
+	private List<Rol> roles; 
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Funcionario funcionario;
-
+	
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Evento> eventos;
 
@@ -106,6 +108,14 @@ public class Usuario implements Serializable {
 
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 	private static final long serialVersionUID = 1L;

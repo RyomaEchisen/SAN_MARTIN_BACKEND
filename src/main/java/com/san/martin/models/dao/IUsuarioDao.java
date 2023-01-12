@@ -14,7 +14,7 @@ public interface IUsuarioDao extends CrudRepository<Usuario, Long>{
 	@Query("select u from Usuario u where u.username=?1")
 	public Usuario findByUsername2(String username);
 	
-	@Query("select username, password, email FROM Usuario WHERE username = ?1 and password=?2 and enabled=true")
+	@Query("select u from Usuario u where u.username=?1 and u.password=?2") 
 	public Usuario userlog(String email, String pass);
 
 }

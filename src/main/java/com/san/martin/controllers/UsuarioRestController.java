@@ -70,15 +70,15 @@ public class UsuarioRestController {
   }
 
   // crear
-  // entity para las restricciones
+  // entity para las restricciones     
  //@Secured({ "ROLE_ADMIN" })
   @PostMapping("/usuarios")
   public ResponseEntity<?> create(@RequestBody Usuario usuario) {
-
+	  System.out.println("HOLA"+usuario.getRoles());
     Usuario usuarioNew = null;
     Map<String, Object> response = new HashMap<>();
     try {
-      usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+      //usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
       usuarioNew = usuarioService.saveUsuario(usuario);
 
     } catch (DataAccessException e) {
@@ -106,18 +106,23 @@ public class UsuarioRestController {
     
     Usuario data=null;
     try {
-     // data = usuarioService.userlogin(usuarioLogin.getEmail(), passwordEncoder.encode(usuarioLogin.getPassword()));
+     //data = usuarioService.userlogin(usuarioLogin.getEmail(), passwordEncoder.encode(usuarioLogin.getPassword()));
       data = usuarioService.userlogin(""+usuarioLogin.getEmail(), ""+usuarioLogin.getPassword());
-      System.out.println(passwordEncoder.encode(usuarioLogin.getPassword()));
-    response.put("data", usuarioService.findAll());
+      System.out.println("data");
+      //System.out.println(data); 
+    	//data = usuarioService.findByUsername(""+usuarioLogin.getEmail());
+    	System.out.println(passwordEncoder.encode(usuarioLogin.getPassword()));
+    	System.out.println("HOLIS"+usuarioLogin.getEmail());
+   // response.put("data", usuarioService.findAll());
+    response.put("data", data);
     //response.put("datapass", passwordEncoder.encode(usuarioLogin.getPassword()));
       
-   /*if (data == null ) {
+   if (data == null ) {
         throw new UsernameNotFoundException("Invalid username or password.");
       }else{
         System.out.println("Usuario logeado: \n" + usuarioLogin.getEmail());
-      }*/
-        //System.out.println("Usuario logeado: \n" + usuarioLogin.getEmail());
+      }
+        //System.out.println("Usuario logeado: \n" + usuarioLogin.getEmail());  
     } catch (DataAccessException e) {
 
       response.put("mensaje", "Error al realizar el insert en la base de datos");
@@ -151,6 +156,7 @@ public class UsuarioRestController {
       usuarioActual.setPassword(usuario.getPassword());
       usuarioActual.setEmail(usuario.getEmail());
       usuarioActual.setEnabled(usuario.getEnabled());
+      usuarioActual.setCargo(usuario.getCargo());
 
       usuarioUpdated = usuarioService.saveUsuario(usuarioActual);
     } catch (DataAccessException e) {

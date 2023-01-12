@@ -2,6 +2,7 @@ package com.san.martin.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,10 +51,10 @@ public class Formulario implements Serializable{
 	
 	
 	public Date getFechacreacion() {
-		return fechacreacion;
+		return fechacreacion;   
 	}
 
-
+//esa seria la relacion entre usuario
 
 	public void setFechacreacion(Date fechacreacion) {
 	this.fechacreacion = fechacreacion;
@@ -63,8 +64,12 @@ public class Formulario implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Funcionario funcionario;
 	
+	@ManyToOne(fetch=FetchType.LAZY) 
+	private Usuario usuario; 
+	
+	
 	@ManyToOne(fetch=FetchType.LAZY)
-	private TipoFormulario tipoFormulario;
+	private TipoFormulario tipoFormulario; 
 	
 	
 	public Long getId() {
@@ -99,7 +104,7 @@ public class Formulario implements Serializable{
 		this.motivo = motivo;
 	}
 
-	public String getTipoDeLicencia() {
+	public String getTipoDeLicencia() { 
 		return tipoDeLicencia;
 	}
 
@@ -192,7 +197,7 @@ public class Formulario implements Serializable{
 	}
 	
 	
-	public String getTipoF() {
+	public String getTipoF() { 
 		return tipoF;
 	}
 

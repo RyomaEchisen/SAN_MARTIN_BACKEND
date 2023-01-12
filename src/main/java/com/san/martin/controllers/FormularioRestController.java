@@ -30,6 +30,8 @@ public class FormularioRestController {
 	
 	@GetMapping("/formularios")
 	public List<Formulario> index(){
+		System.out.println("olga");
+		System.out.println(formularioService.findAll());
 		return formularioService.findAll();
 	}
 	//Crud

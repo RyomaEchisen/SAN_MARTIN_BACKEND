@@ -23,7 +23,8 @@ public class Rol implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true, length = 20)
+	/*@Column(unique = true, length = 20)*/
+	@Column(length = 20)
 	private String nombre;
 	
 	@Column(name="create_at")
