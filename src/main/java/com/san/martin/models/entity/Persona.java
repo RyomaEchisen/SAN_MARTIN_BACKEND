@@ -19,6 +19,8 @@ import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="personas")
 public class Persona implements Serializable {
@@ -94,6 +96,7 @@ public class Persona implements Serializable {
 	private List <HojaDeVida> hojaDeVidas;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="persona", cascade=CascadeType.ALL)
+	// @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private List <Funcionario> funcionarios;
 	
 	public Persona() {

@@ -15,8 +15,9 @@ public class FormularioServiceImpl implements IFormularioService{
 	@Autowired
 	private IFormularioDao formularioDao;
 	
-	@Override
+	/// 
 	
+
 	@Transactional(readOnly = true)
 	public List<Formulario> findAll(){
 		return (List<Formulario>) formularioDao.findAll();
@@ -39,6 +40,11 @@ public class FormularioServiceImpl implements IFormularioService{
 		// TODO Auto-generated method stub
 		formularioDao.deleteById(id);
 		
+	}
+	@Override
+	public List<Formulario> findByUserId(Long id) {
+		// TODO Auto-generated method stubok
+		return (List<Formulario>)formularioDao.findUserAll(id);
 	}
 	
 }

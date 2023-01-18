@@ -43,12 +43,11 @@ public class Usuario implements Serializable {
 	private List<Rol> roles; 
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	private Funcionario funcionario;
+	private Funcionario funcionario;  
 	
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Evento> eventos;
-
 
 
 	public Long getId() {

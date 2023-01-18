@@ -25,9 +25,14 @@ import com.san.martin.models.services.IFormularioService;
 @RequestMapping("/api_formulario")
 public class FormularioRestController {
 	
-	@Autowired
+	@Autowired 
 	private IFormularioService formularioService;
 	
+	@GetMapping("/formulariosuser/{id}")
+	public List<Formulario> listuser(@PathVariable Long id) {
+		return formularioService.findByUserId(id);
+	}
+	/// 
 	@GetMapping("/formularios")
 	public List<Formulario> index(){
 		System.out.println("olga");
@@ -64,16 +69,20 @@ public class FormularioRestController {
 		
 	    }
 		//crear
-		//entity para las restricciones 
+		//entity para las restricciones no hay
 		@PostMapping("/formularios")
 		public ResponseEntity<?> create(@RequestBody Formulario formulario) {
 			
 			
 			Formulario formularioNew = null;
 			Map<String, Object> response = new HashMap<>();
-		
+			System.out.println("formulario");
+			System.out.println(formulario.getUsuario());
 			try {
+				//formularioNew.setUsuario(formulario.getUsuario());
+			
 				formularioNew = formularioService.saveFormulario(formulario);
+				
 			
 			} catch(DataAccessException e) {
 				
@@ -120,6 +129,7 @@ public class FormularioRestController {
 		    	 formularioActual.setPdfId(formulario.getPdfId());
 		    	 formularioActual.setObservaciones(formulario.getObservaciones());
 		    	 //formularioActual.setFechacreacion(formulario.getFechacreacion());
+		    	 
 		     
 		     
 		    	 formularioUpdated = formularioService.saveFormulario(formularioActual);

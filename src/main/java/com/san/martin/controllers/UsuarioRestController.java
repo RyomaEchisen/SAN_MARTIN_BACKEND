@@ -157,6 +157,8 @@ public class UsuarioRestController {
       usuarioActual.setEmail(usuario.getEmail());
       usuarioActual.setEnabled(usuario.getEnabled());
       usuarioActual.setCargo(usuario.getCargo());
+      usuarioActual.setRoles(usuario.getRoles());
+//      usuarioActual.setFormularios(usuario.getFormularios());
 
       usuarioUpdated = usuarioService.saveUsuario(usuarioActual);
     } catch (DataAccessException e) {

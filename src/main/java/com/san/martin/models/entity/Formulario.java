@@ -4,17 +4,24 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="formularios")
@@ -64,10 +71,41 @@ public class Formulario implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Funcionario funcionario;
 	
-	@ManyToOne(fetch=FetchType.LAZY) 
-	private Usuario usuario; 
+	
+	@ManyToOne(optional=false,cascade=CascadeType.MERGE,fetch=FetchType.EAGER) 
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+	///@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Usuario usuario;
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 	
+	
+	
+	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	/* customizable para asignar otro nombre a la tabla intermedia */
+	//@JoinTable(name = "formularios_usuarios", joinColumns = @JoinColumn(name = "fomulario_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"), uniqueConstraints = {
+	//		@UniqueConstraint(columnNames = { "fomulario_id", "usuario_id" }) }) 
+	//private List<Usuario> usuario; 
+	
+
+	//public List<Usuario> getUsuario() {
+	//	return usuario;
+	//}
+
+
+	//public void setUsuario(List<Usuario> usuario) {
+	//	this.usuario = usuario;
+	//}
+
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	private TipoFormulario tipoFormulario; 
 	

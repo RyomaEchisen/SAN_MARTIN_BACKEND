@@ -11,9 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -32,8 +35,21 @@ public class Funcionario implements Serializable {
 
 	
 	@ManyToOne(fetch=FetchType.LAZY)
+	//@ManyToOne(optional=false,cascade=CascadeType.MERGE,fetch=FetchType.EAGER) 
+	//@JoinColumn(name = "persona_id", referencedColumnName = "id")
+   // @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private Persona persona;
 	
+	/*public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}*/
+
+
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Sucursal sucursal;
 	

@@ -10,5 +10,6 @@ public interface IFormularioService {
 	public 	Formulario findById(Long id);
 	public  Formulario saveFormulario(Formulario formulario);
 	public void deleteformularioById(Long id);
+	 public List<Formulario> findByUserId(Long id);
 	
 }
