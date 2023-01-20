@@ -128,6 +128,7 @@ public class FormularioRestController {
 		    	 formularioActual.setComprobanteId(formulario.getComprobanteId());
 		    	 formularioActual.setPdfId(formulario.getPdfId());
 		    	 formularioActual.setObservaciones(formulario.getObservaciones());
+		    	 formularioActual.setTotalHoras(formulario.getTotalHoras());
 		    	 //formularioActual.setFechacreacion(formulario.getFechacreacion());
 		    	 
 		     

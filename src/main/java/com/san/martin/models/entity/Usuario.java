@@ -45,6 +45,10 @@ public class Usuario implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Funcionario funcionario;  
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Formulario> formularios;
+
+	
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Evento> eventos;

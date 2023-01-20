@@ -43,6 +43,7 @@ public class Formulario implements Serializable{
 	private String aHora;
 	private Date fechaRetorno;
 	private int gestion;
+	private String totalHoras;
 	private Date fecha;
 	private Long comprobanteId;
 	private Long pdfId;
@@ -61,7 +62,7 @@ public class Formulario implements Serializable{
 		return fechacreacion;   
 	}
 
-//esa seria la relacion entre usuario
+//
 
 	public void setFechacreacion(Date fechacreacion) {
 	this.fechacreacion = fechacreacion;
@@ -72,7 +73,7 @@ public class Formulario implements Serializable{
 	private Funcionario funcionario;
 	
 	
-	@ManyToOne(optional=false,cascade=CascadeType.MERGE,fetch=FetchType.EAGER) 
+	@ManyToOne(optional=false,cascade= CascadeType.MERGE,fetch=FetchType.EAGER) 
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	///@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -244,6 +245,14 @@ public class Formulario implements Serializable{
 		this.tipoF = tipoF;
 	}
 
+	public String getTotalHoras() {
+		return totalHoras;
+	}
+
+
+	public void setTotalHoras(String totalHoras) {
+		this.totalHoras = totalHoras;
+	}
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
