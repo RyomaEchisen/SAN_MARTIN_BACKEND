@@ -35,6 +35,7 @@ public class Usuario implements Serializable {
 	@Column(unique = true)
 	private String email;
 	private String cargo;
+	private String fechaIngreso;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	/* customizable para asignar otro nombre a la tabla intermedia */
@@ -47,12 +48,23 @@ public class Usuario implements Serializable {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Formulario> formularios;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Vacaciones> vacaciones;
 
 	
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Evento> eventos;
 
+
+	public String getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(String fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
 
 	public Long getId() {
 		return id;
